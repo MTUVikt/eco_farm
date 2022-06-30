@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% load products_tags %}
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+{% block content %}
+    <section class="main-section alabaster">
+        <!--main-section alabaster-start-->
+        <div class="container">
+            <div class="row">
+                <figure class="col-lg-5 col-sm-4 wow fadeInLeft">
+                    <img src="{{ product.image.url }}" alt="">
+                </figure>
+                <div class="col-lg-7 col-sm-8 featured-work">
+                    <h2>{{ product.category }}</h2>
+                    <h2>{{ product.title }}</h2>
+                    <div class="featured-box">
+                        <div class="featured-box-col1 wow fadeInRight delay-02s">
+                            <i class="fa fa-magic"></i>
+                        </div>
+                        <div class="featured-box-col2 wow fadeInRight delay-02s">
+                            <h3>Descripton</h3>
+                            <p>{{ product.description }}</p>
+                        </div>
+                    </div>
+                    <div class="featured-box">
+                        <div class="featured-box-col1 wow fadeInRight delay-04s">
+                            <i class="fa fa-gift"></i>
+                        </div>
+                        <div class="featured-box-col2 wow fadeInRight delay-04s">
+                            <h3>Updated: {{ product.updated }}</h3>
+                            <p>Availability: {{ product.amount }}{{ product.measure }}</p>
+                            <p>Price: {{ product.price }}</p>
+                        </div>
+                    </div>
+                    <div class="featured-box">
+                        <div class="featured-box-col1 wow fadeInRight delay-06s">
+                            <i class="fa fa-dashboard"></i>
+                        </div>
+                        <div class="text-center">
+                            <form action="{% url 'cart_add' product.id %}" method="post">
+                                {{ cart_add_form }}
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Add to cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

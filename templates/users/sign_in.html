@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Sign in
+{% endblock %}
+
+{% block content %}
+    <section class="business-talking">
+		<!--business-talking-start-->
+		<div class="container">
+			<h2>Let’s sign in.</h2>
+		</div>
+    <div class="container">
+		<section class="main-section contact" id="contact">
+			<div class="row">
+				<div class=" wow fadeInUp delay-05s">
+					<div class="form">
+						<form action="" method="post" role="form" class="">
+                            {% csrf_token %}
+							<div class="form-group">
+								<input type="text" name="username" class="form-control input-text" id="id_username" placeholder="Your Username" data-rule="minlen:4" data-msg="Please enter username" />
+								<div class="validation"></div>
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control input-text" name="password" id="id_password" placeholder="Your Password" data-rule="password" data-msg="Please enter at least 8 chars" />
+								<div class="validation"></div>
+							</div>
+
+							<div class="text-center"><button type="submit" class="input-btn">Sign in</button></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	</section>
+
+
+{% endblock %}

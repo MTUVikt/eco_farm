@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block content %}
+    <section class="main-section" id="service">
+        <div class="container">
+            <h2>Cart</h2>
+        </div>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6 wow fadeInLeft delay-05s">
+                            <div class="service-list">
+                                <div class="service-list-col1">
+                                    <i class="fa fa-paw"></i>
+                                </div>
+                                <div class="service-list-col2">
+                                    <h3>{{ product.title }}</h3>
+                                    <p>{{ product.category }}</p>
+                                </div>
+                            </div>
+                            <div class="service-list">
+                                <div class="service-list-col1">
+                                    <i class="fa fa-gear"></i>
+                                </div>
+                                <div class="service-list-col2">
+                                    <h3>price per {{ product.measure }}: {{ item.price }} UAH</h3>
+                                    <h3>Total price per {{ product.measure }}: {{ item.total_price }} UAH</h3>
+                                </div>
+                            </div>
+                            <div class="service-list">
+                                <div class="service-list-col1">
+                                    <i class="fa fa-apple"></i>
+                                </div>
+                                <form action="{% url 'cart_add' product.id %}" method="post">
+                                    <div class="service-list-col2">
+                                        <a href="{% url 'cart_remove' product.id %}"><input type="submit" value="Delete"
+                                                                                            class="btn-success"></a>
+                                        <p>
+                                            {{ item.update_quantity_form.quantity }}
+                                            {{ item.update_quantity_form.update }}
+                                            <input type="submit" value="Update" class="btn-success">
+                                            {% csrf_token %}
+
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <figure class="col-lg-8 col-sm-6  text-right wow fadeInUp delay-02s">
+                            <a href="{{ product.get_absolute_url }}">
+                                <img src="{{ product.image.url }}" alt="">
+                            </a>
+                        </figure>
+                    </div>
+                </div>
+                <hr>
+            {% endwith %}
+        {% endfor %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 wow fadeInLeft delay-05s">
+                    <div class="service-list">
+                        <div class="service-list-col1">
+                            <i class="fa fa-medkit"></i>
+                        </div>
+                        <div class="service-list-col2">
+                            <h3>Total price:</h3>
+                            <h3>{{ cart.get_total_price }} UAH</h3>
+                        </div>
+                        <hr>
+                        <div class="service-list">
+                            <div class="service-list-col1">
+                                <i class="fa fa-gear"></i>
+                            </div>
+                            <div class="service-list-col2">
+                                <a href="{% url 'product_list' %}"><h3>
+                                    Return shopping
+                                </h3></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="business-talking">
+        <div class="container">
+            <h2>Personal area.</h2>
+        </div>
+    </section>
+    {% if user.is_authenticated %}
+        <nav class="main-nav-outer" id="test">
+        <div class="container">
+            <ul class="main-nav">
+                <div class="contact-info-box phone clearfix">
+                <span><li><a href="{% url 'logout_user' %}"><h3>Logout</h3></a></li></span>
+                </div>
+            </ul>
+        </div>
+        <div class="container">
+            <section class="main-section contact" id="contact">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-7 wow fadeInLeft">
+                        <div class="contact-info-box phone clearfix">
+                            <h4>Username:</h4>
+                            <span><h3>{{ object.user.username }}</h3></span>
+                        </div>
+                        <div class="contact-info-box email clearfix">
+                            <h4>Email:</h4>
+                            <span><h3>{{ object.user.email }}</h3></span>
+                        </div>
+                        <div class="contact-info-box email clearfix">
+                            <h4>First name:</h4>
+                            <span><h3>{{ object.user.first_name }}</h3></span>
+                        </div>
+                        <div class="contact-info-box email clearfix">
+                            <h4>Last name:</h4>
+                            <span><h3>{{ object.user.last_name }}</h3></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="container">
+            <section class="main-section contact" id="contact">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-7 wow fadeInLeft">
+                        <div class="contact-info-box phone clearfix">
+                            <span><h2>Delivery address</h2></span>
+                        </div>
+                        <div class="contact-info-box phone clearfix">
+                            <h4>Country:</h4>
+                            <span><h3>{{ object.country }}</h3></span>
+                        </div>
+                        <div class="contact-info-box email clearfix">
+                            <h4>City:</h4>
+                            <span><h3>{{ object.city }}</h3></span>
+                        </div>
+                        <div class="contact-info-box email clearfix">
+                            <h4>Street:</h4>
+                            <span><h3>{{ object.street }}</h3></span>
+                        </div>
+                        <div class="contact-info-box email clearfix">
+                            <h4>House number:</h4>
+                            <span><h3>{{ object.house_number }}</h3></span>
+                        </div>
+                        <div class="contact-info-box email clearfix">
+                            <h4>Apartment number:</h4>
+                            <span><h3>{{ object.apartment_number }}</h3></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    {% else %}
+        <nav class="main-nav-outer" id="test">
+        <!--main-nav-start-->
+        <div class="container">
+            <ul class="main-nav">
+                <li><a href="{% url 'sign_in' %}">Sign in</a>|<a href="{% url 'sign_up' %}">Sign up</a></li>
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
