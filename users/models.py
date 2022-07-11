@@ -2,6 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+class AuthUser(models.Model):
+    email = models.EmailField(max_length=150, unique=True)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
+
+
 class DeliveryAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=150)

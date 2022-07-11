@@ -13,11 +13,19 @@
                 {% for cat in categories %}
                     <li><a href="{{ cat.get_absolute_url }}">{{ cat.title }}</a></li>
                 {% endfor %}
+{% comment %}
+                <li>
+                    <form action="{% url 'product_list' %}" method="get">
+                        <input type="search" placeholder="search" aria-label="search" name="search">
+                        <button class=" btn btn-success" type="submit"></button>
+                    </form>
+                </li>
+{% endcomment %}
             </ul>
         </div>
 
         <div class="portfolioContainer wow fadeInUp delay-04s">
-            {% for p in products %}
+            {% for p in object_list %}
                 <a href="{{ p.get_absolute_url }}">
                     <div class=" Portfolio-box branding">
                         <img src="{{ p.image.url }}" alt="">

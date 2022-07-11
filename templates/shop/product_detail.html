@@ -34,6 +34,7 @@
                             <p>Price: {{ product.price }}</p>
                         </div>
                     </div>
+                    {% if user.is_authenticated %}
                     <div class="featured-box">
                         <div class="featured-box-col1 wow fadeInRight delay-06s">
                             <i class="fa fa-dashboard"></i>
@@ -46,6 +47,7 @@
                             </form>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import SignInView, SignUpView, PersonalArea, logout_user
+from .views import *
 
 urlpatterns = [
    path('', include('django.contrib.auth.urls')),
@@ -8,4 +8,5 @@ urlpatterns = [
    path('sign_up/', SignUpView.as_view(), name='sign_up'),
    path('sign_in/', SignInView.as_view(), name='sign_in'),
    path('logout_user/', logout_user, name='logout_user'),
+   path('add_delivery_address', add_delivery_address, name='add_delivery_address'),
 ]

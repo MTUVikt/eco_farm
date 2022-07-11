@@ -28,10 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_REQUIRED = True
 
 CART_SESSION_ID = 'cart'
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,8 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
+
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
@@ -48,6 +54,8 @@ INSTALLED_APPS = [
 
 
 ]
+# Application definition
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,7 +102,25 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

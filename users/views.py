@@ -5,12 +5,12 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView
 
-from users.forms import SignUpForm
+from users.forms import SignUpForm, AddDeliveryAddressForm
 from users.models import DeliveryAddress
 
 
 class PersonalArea(DetailView):
-    model = DeliveryAddress
+    model = User
     template_name = 'users/personal_area.html'
 
 
@@ -46,3 +46,15 @@ class SignInView(LoginView):
 def logout_user(request):
     logout(request)
     return redirect('main')
+
+
+def add_delivery_address(request):
+    if request.method == 'POST':
+        form = AddDeliveryAddressForm(request.POST)
+        if form.is_valid():
+            form.save(user=request.user)
+
+            return redirect('personal_area')
+    else:
+        form = AddDeliveryAddressForm()
+    return render(request, 'users/add_delivery_address.html', {'form': form})
